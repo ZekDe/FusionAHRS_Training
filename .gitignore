@@ -1,0 +1,25 @@
+.cproject
+.gitignore.txt
+.mxproject
+.project
+.settings/
+Core/Inc/gpio.h
+Core/Inc/i2c.h
+Core/Inc/main.h
+Core/Inc/stm32_assert.h
+Core/Inc/stm32f4xx_it.h
+Core/Src/gpio.c
+Core/Src/i2c.c
+Core/Src/syscalls.c
+Core/Src/sysmem.c
+Core/Src/system_stm32f4xx.c
+Core/Src/stm32f4xx_hal_msp.c
+Core/Startup/
+Debug/
+Middlewares/
+Drivers/
+STM32F407VGTX_FLASH.ld
+STM32F407VGTX_RAM.ld
+sensorFusionTraining Debug.launch
+sensorFusionTraining.ioc
+
