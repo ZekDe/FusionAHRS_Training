@@ -25,6 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "ZekDe_funcs.h"
 #include "mpu9250.h"
 #include "usbd_cdc_if.h"
 #include <stddef.h>
@@ -51,6 +52,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+rising_edge_detection_t s_red;
+
 int16_t ai_accRaw[3] =
 { 0 };
 int16_t ai_gyroRaw[3] =
@@ -89,7 +92,6 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 static void send2Pc(void);
 void fusionTask(void);
-float norm(const float *vec, uint32_t size);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -288,34 +290,6 @@ void fusionTask(void)
 	HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
 }
 
-float norm(const float *vec, uint32_t size)
-{
-	float X;
-	float scale;
-	float absxk;
-	float t;
-
-	X = 0.0;
-	scale = 1.175494e-38;
-
-	for (uint32_t k = 0; k < size; k++)
-	{
-		absxk = fabs(vec[k]);
-		if (absxk > scale)
-		{
-			t = scale / absxk;
-			X = X * t * t + 1.0;
-			scale = absxk;
-		}
-		else
-		{
-			t = absxk / scale;
-			X += t * t;
-		}
-	}
-
-	return scale * sqrt(X);
-}
 /* USER CODE END 4 */
 
 /**
